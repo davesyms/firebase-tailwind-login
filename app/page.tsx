@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>Head to /signin to test out the App!</div>
   )
 }
