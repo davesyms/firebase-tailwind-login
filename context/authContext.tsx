@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { createContext, useContext } from "react";
-import { SignInError } from "../pages/api/(signin)/SignInTypes";
+import { SignInError } from "../types/SignInTypes";
 import { useAuth } from "./useAuth";
 
 const AuthContext = createContext({

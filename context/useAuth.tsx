@@ -1,6 +1,7 @@
-import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { isSignInError, SignInError } from "../pages/api/(signin)/SignInTypes";
+import { isSignInError, SignInError } from "../types/SignInTypes";
+import { User } from "firebase/auth";
+import { auth } from "../lib/firebaseApp";
 import {
     validateEmail,
     validatePassword,
@@ -24,12 +25,14 @@ export const useAuth = () => {
         // Validate the email and password
         const emailError: SignInError | undefined = validateEmail(email);
         if (emailError) {
+            setLoading(false);
             return emailError;
         }
 
         const passwordError: SignInError | undefined =
             validatePassword(password);
         if (passwordError) {
+            setLoading(false);
             return passwordError;
         }
 
@@ -46,17 +49,22 @@ export const useAuth = () => {
                 const user = await res.json();
                 // Check if the user is a valid user
                 setUser(user);
+                setLoading(false);
                 return user;
             } else {
                 // If the user was not signed in successfully, return the error
                 const error = await res.json();
+                setLoading(false);
                 return error;
             }
         } catch (error) {
             // If there was an error signing in, check if it was a sign in error
             if (isSignInError(error)) {
+                setLoading(false);
                 return error;
             }
+            // If it was not a sign in error, return an unknown error
+            setLoading(false);
             return "unknown";
         }
     };
