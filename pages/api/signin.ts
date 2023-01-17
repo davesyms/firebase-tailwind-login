@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { auth } from "../../../lib/firebaseApp";
+import { auth } from "../../lib/firebaseApp";
 
 import {
     validateEmail,
     validatePassword
-} from "../../../utils/(auth)/FieldValidations";
-import { isSignInRequest, SignInError } from "./SignInTypes";
+} from "../../utils/(auth)/FieldValidations";
+import { isSignInRequest, SignInError } from "../../types/SignInTypes";
 
 import { FirebaseError } from "@firebase/util";
 import {

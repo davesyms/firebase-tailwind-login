@@ -1,0 +1,10 @@
+.svg {
+    margin: auto;
+    display: block;
+    shape-rendering: auto;
+}
+
+
+.path {
+    transform:scale(1);transform-origin:50px 50px
+}

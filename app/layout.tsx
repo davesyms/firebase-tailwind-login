@@ -1,14 +1,18 @@
-import '../styles/globals.css'
+"use client"
+import "../styles/globals.css";
+import { AuthProvider } from "../context/authContext";
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode;
 }) {
-  return (
-    <html>
-      <head />
-      <body>{children}</body>
-    </html>
-  )
+    return (
+        <html>
+            <head />
+            <AuthProvider>
+                <body>{children}</body>
+            </AuthProvider>
+        </html>
+    );
 }
