@@ -10,14 +10,36 @@ export default function AuthForm(props: {
     type: "Sign Up" | "Sign In";
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
-    emailError: ErrorMessage | undefined;
+    emailError: ErrorMessage | "" | undefined;
     password: string;
     setPassword: React.Dispatch<React.SetStateAction<string>>;
-    passwordError: PasswordError | "Wrong Password" | undefined;
+    passwordError: PasswordError | "Wrong Password" | "" | undefined;
     children?: React.ReactNode;
     onSubmit: FormEventHandler<HTMLFormElement>;
     disableSubmit?: boolean;
 }) {
+
+    // Redirect message for sign in and sign up forms depending on the type prop
+    const redirectMessage: React.ReactNode = props.type === "Sign Up" ? (
+        <div className="w-full h-[2rem] text-sm text-center">
+            <p>
+                Already have an account?{" "}
+                <a href="/signin" className="text-blue-500">
+                    Sign In
+                </a>
+            </p>
+        </div>
+    ) : (
+        <div className="w-full h-[2rem] text-sm text-center">
+            <p>
+                Don&apos;t have an account?{" "}
+                <a href="/signup" className="text-blue-500">
+                    Sign Up
+                </a>
+            </p>
+        </div>
+    );
+
     return (
         <div className="w-screen h-screen flex align-middle justify-center">
             <form
@@ -26,7 +48,7 @@ export default function AuthForm(props: {
             >
                 <div className="w-full h-full px-5 flex align-middle flex-col flex-nowrap text-left">
                     <div className="w-full h-[150px] flex align-bottom">
-                        <Logo className="w-auto h-auto max-h-[80px] m-auto" />
+                        <Logo className="w-auto h-auto max-h-[80px] m-auto scale-125" />
                     </div>
                     <div className="w-full h-[2rem] text-2xl font-header">
                         <h1>{props.type}</h1>
@@ -36,7 +58,7 @@ export default function AuthForm(props: {
                             type="email"
                             value={props.email}
                             placeholder="Email"
-                            error={props.emailError ? props.emailError : null}
+                            error={props.emailError ? props.emailError : ""}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 props.setEmail(
                                     e.currentTarget.value
@@ -53,7 +75,7 @@ export default function AuthForm(props: {
                             value={props.password}
                             placeholder="Password"
                             error={
-                                props.passwordError ? props.passwordError : null
+                                props.passwordError ? props.passwordError : ""
                             }
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 props.setPassword(
@@ -70,7 +92,7 @@ export default function AuthForm(props: {
                             {props.children}
                         </div>
                     )}
-                    <div className="w-full h-[60px] p-1">
+                    <div className="w-full h-[90px] py-4">
                         <Button
                             type="submit"
                             text={props.type}
@@ -78,6 +100,7 @@ export default function AuthForm(props: {
                         />
                     </div>
                 </div>
+                {redirectMessage}
             </form>
         </div>
     );

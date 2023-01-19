@@ -44,8 +44,6 @@ export default function Page() {
 
     // useEffect hook is used to redirect the user to the homepage if the user is logged in
     useEffect(() => {
-        console.log("user: ", user);
-        console.log("authLoading: ", authLoading);
         if (user && !authLoading) {
             router.push("/");
         }
@@ -146,12 +144,11 @@ export default function Page() {
                 setLoading(false);
                 return;
             }
-            console.log("Logged In", user);
             // If there is no error, set the loading state to false and redirect to the homepage
             setLoading(false);
             //router.push("/");
         } catch (err: unknown) {
-            console.log(err);
+            console.log("error occured", err);
         }
     };
 

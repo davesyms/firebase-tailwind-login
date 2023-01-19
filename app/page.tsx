@@ -10,7 +10,7 @@ export default function Page() {
             <button
                 className=" outline p-4 rounded-xl"
                 onClick={() => {
-                    router.push("/login");
+                    router.push("/signin");
                 }}
             >
                 Login
