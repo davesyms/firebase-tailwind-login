@@ -27,6 +27,7 @@ export function isSignUpError(data: any): data is SignUpError {
         data === "invalid request data" ||
         data === "invalid-email" ||
         data === "email-already-in-use" ||
+        data === "user-not-found" ||
         data === "unknown"
     );
 }

@@ -5,6 +5,11 @@ import {
     PasswordError,
 } from "../../../../types/SignInTypes";
 
+import {
+    SignUpError,
+    isSignUpError,
+} from "../../../../types/SignUpTypes";
+
 export type ErrorMessage =
     | PasswordError
     | "Invalid Email"
@@ -13,8 +18,8 @@ export type ErrorMessage =
     | "Wrong Password"
     | "Unknown Error";
 
-export function determineErrorMessage(error: SignInError): ErrorMessage {
-    if (!isSignInError(error)) {
+export function determineErrorMessage(error: SignInError | SignUpError): ErrorMessage {
+    if (!isSignInError(error) && !isSignUpError(error)) {
         return "Unknown Error";
     }
     if (isPasswordError(error)) {

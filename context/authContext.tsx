@@ -1,6 +1,7 @@
 import { User } from "firebase/auth";
 import { createContext, useContext } from "react";
 import { SignInError } from "../types/SignInTypes";
+import { SignUpError } from "../types/SignUpTypes";
 import { useAuth } from "./useAuth";
 
 const AuthContext = createContext({
@@ -10,6 +11,12 @@ const AuthContext = createContext({
         email: string,
         password: string
     ): Promise<User | SignInError> => {
+        return "unknown";
+    },
+    signUp: async (
+        email: string,
+        password: string
+    ): Promise<User | SignUpError> => {
         return "unknown";
     },
 });
